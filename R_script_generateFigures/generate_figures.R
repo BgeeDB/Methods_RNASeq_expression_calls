@@ -69,7 +69,6 @@ gtexBgee_cutoff <- ggplot(data = gtexBgee, mapping = aes(x = gtexBgee$uberonName
   labs(x = "", y = "% Protein Coding Genes") +
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 55, hjust = 1))
-gtexBgee_cutoff
 
 pdf(file = paste0(outFiles, "/GTEx_Bgee_Cutoff.pdf"), width = 16, height = 10)   
 gtexBgee_cutoff
