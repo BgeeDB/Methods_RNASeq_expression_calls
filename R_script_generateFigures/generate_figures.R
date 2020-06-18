@@ -2,12 +2,14 @@
 ##  libraries used
 library(ggplot2)
 
-pathToFIles <- "../Files_to_generate_figures/"
-outFiles <- "../Figure_BgeeCallpaper/"
+pathToFIles <- "Files_to_generate_figures/"
+outFiles <- "Figure_BgeeCallpaper/"
 
 Threshold_2 <- read.table(paste0(pathToFIles, "/", "presence_absence_all_samples_TPM-treshold.txt"), header=TRUE, sep="\t", comment.char="")
 bgee_withoutDecov <- read.table(paste0(pathToFIles, "/", "presence_absence_all_samples_without_decov.txt"), header=TRUE, sep="\t", comment.char="")
 bgeeThreshold <- read.table(paste0(pathToFIles, "/", "presence_absence_all_samples_14.txt"), header=TRUE, sep="\t", comment.char="")
+bgeeThreshold_without_N <- read.table(paste0(pathToFIles, "/", "presence_absence_all_samples_without_N.txt"), header=TRUE, sep="\t", comment.char="")
+
 
 infoFile <- read.table(paste0(pathToFIles, "/", "info_rnaSeq.tsv"), header=TRUE, sep="\t", comment.char="")
 
@@ -40,8 +42,20 @@ gg_bgee <- ggplot(data = bgeeThreshold, mapping = aes(x = bgeeThreshold$organism
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+
 pdf(file = paste0(outFiles, "/Bgee_threshold_allSpecies.pdf"), width = 14, height = 10)
 gg_bgee
+dev.off()
+
+## Bgee Intergenic cut-off without N
+gg_bgee_wo_N <- ggplot(data = bgeeThreshold_without_N, mapping = aes(x = bgeeThreshold_without_N$organism, y = bgeeThreshold_without_N$proportionCodingPresent, label=bgeeThreshold_without_N$organism)) +
+  geom_boxplot(alpha = 1) +
+  labs(x = "", y = "% Protein Coding Genes") +
+  scale_y_continuous(limits=c(0,100)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+pdf(file = paste0(outFiles, "/Bgee_threshold_wo_N_allSpecies.pdf"), width = 14, height = 10)
+gg_bgee_wo_N
 dev.off()
 
 ## Collect just GTEx data
