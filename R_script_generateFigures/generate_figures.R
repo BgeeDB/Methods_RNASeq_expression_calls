@@ -54,7 +54,7 @@ gg_bgee_wo_N <- ggplot(data = bgeeThreshold_without_N, mapping = aes(x = bgeeThr
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-pdf(file = paste0(outFiles, "/Bgee_threshold_wo_N_allSpecies.pdf"), width = 14, height = 10)
+pdf(file = paste0(outFiles, "/Bgee_threshold_without_N_allSpecies.pdf"), width = 14, height = 10)
 gg_bgee_wo_N
 dev.off()
 
