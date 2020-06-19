@@ -20,7 +20,7 @@ gg_Threshold_2 <- ggplot(data = Threshold_2, mapping = aes(x = Threshold_2$organ
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-pdf(file = paste0(outFiles, "/TPM_threshold_allSpecies.pdf"), width = 14, height = 10)
+pdf(file = paste0(outFiles, "/TPM_threshold_allSpecies.pdf"), width = 14, height = 7)
 gg_Threshold_2
 dev.off()
 
@@ -31,7 +31,7 @@ gg_bgeeWithoutDec <- ggplot(data = bgee_withoutDecov, mapping = aes(x = bgee_wit
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-pdf(file = paste0(outFiles, "/Bgee_without_dev_allSpecies.pdf"), width = 14, height = 10)
+pdf(file = paste0(outFiles, "/Bgee_without_dev_allSpecies.pdf"), width = 14, height = 7)
 gg_bgeeWithoutDec
 dev.off()
 
@@ -43,7 +43,7 @@ gg_bgee <- ggplot(data = bgeeThreshold, mapping = aes(x = bgeeThreshold$organism
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
-pdf(file = paste0(outFiles, "/Bgee_threshold_allSpecies.pdf"), width = 14, height = 10)
+pdf(file = paste0(outFiles, "/Bgee_threshold_allSpecies.pdf"), width = 14, height = 7)
 gg_bgee
 dev.off()
 
@@ -54,7 +54,7 @@ gg_bgee_wo_N <- ggplot(data = bgeeThreshold_without_N, mapping = aes(x = bgeeThr
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-pdf(file = paste0(outFiles, "/Bgee_threshold_without_N_allSpecies.pdf"), width = 14, height = 10)
+pdf(file = paste0(outFiles, "/Bgee_threshold_without_N_allSpecies.pdf"), width = 14, height = 7)
 gg_bgee_wo_N
 dev.off()
 
@@ -70,7 +70,7 @@ gtexThreshold_cutoff <- ggplot(data = gtexThreshold, mapping = aes(x = gtexThres
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 55, hjust = 1))
 
-pdf(file = paste0(outFiles, "/GTEx_threshold.pdf"), width = 14, height = 10)
+pdf(file = paste0(outFiles, "/GTEx_threshold.pdf"), width = 14, height = 7)
 gtexThreshold_cutoff
 dev.off()
 
@@ -84,6 +84,6 @@ gtexBgee_cutoff <- ggplot(data = gtexBgee, mapping = aes(x = gtexBgee$uberonName
   scale_y_continuous(limits=c(0,100)) +
   theme(axis.text.x = element_text(angle = 55, hjust = 1))
 
-pdf(file = paste0(outFiles, "/GTEx_Bgee_Cutoff.pdf"), width = 16, height = 10)
+pdf(file = paste0(outFiles, "/GTEx_Bgee_Cutoff.pdf"), width = 16, height = 7)
 gtexBgee_cutoff
 dev.off()
