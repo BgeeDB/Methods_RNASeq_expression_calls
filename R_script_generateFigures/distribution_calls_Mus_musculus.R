@@ -3,8 +3,8 @@
 library(varhandle)
 library(ggplot2)
 
-readFile <- load("/Users/sfonseca1/Documents/GitHub_projects/RNASeq_calls/Files_to_generate_figures/distribution_comparision_10090.RDa")
-outFiles <- "/Users/sfonseca1/Documents/GitHub_projects/RNASeq_calls/Figure_BgeeCallpaper/"
+readFile <- load("Files_to_generate_figures/distribution_comparision_10090.RDa")
+outFiles <- "Figure_BgeeCallpaper/"
 
 ## collect all data and get info about number of libraries
 fileData <- all_distribution
