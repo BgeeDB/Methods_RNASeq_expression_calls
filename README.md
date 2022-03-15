@@ -3,14 +3,14 @@
 Sara S. Fonseca Costa, Marta Rosikiewic, Julien Roux, Julien Wollbrett, Frederic B. Bastian, Marc Robinson-Rechavi
 
 
-This repository collect all the data files as well as scripts necessary to re-generate all the figures of the methods paper to call expressed genes on RNASeq data.
-
-The paper can be found on bioRxiv.
-
 <img src="figures/overview.png" width="1280"/>
 
+The paper can be found on [bioRxiv]().
 
-##### This repository is organized by 4 main folders:
+#### The repository
+This repository collect all the data files as well as scripts necessary to re-generate all the figures of the methods paper to call expressed genes on RNASeq data.
+
+The repository is organized by 5 main folders:
 
 *   [data/](data/)
 
