@@ -1,0 +1,2 @@
+speciesId	speciesName	numberLibrariesUsed	numberLibraries
+Mus musculus	8	8

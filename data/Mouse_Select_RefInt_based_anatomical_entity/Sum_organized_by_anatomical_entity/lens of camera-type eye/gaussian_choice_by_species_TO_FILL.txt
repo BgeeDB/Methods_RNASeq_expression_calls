@@ -1,0 +1,2 @@
+speciesId	numberGaussiansCoding	numberGaussiansIntergenic	selectedGaussianCoding	selectionSideCoding	selectedGaussianIntergenic	selectionSideIntergenic	comment	annotatorId
+Mus musculus	4	4
