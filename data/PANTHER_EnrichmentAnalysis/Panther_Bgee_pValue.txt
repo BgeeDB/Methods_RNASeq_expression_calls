@@ -1,0 +1,40 @@
+
+
+
+
+
+Analysis Type:	PANTHER Overrepresentation Test (Released 20220202)
+Annotation Version and Release Date:	PANTHER version 16.0 Released 2020-12-01
+Analyzed List:	upload_1 (Mus musculus)
+Reference List:	Mus musculus (all genes in database)
+Test Type:	FISHER
+Correction:	FDR
+PANTHER Pathways	Mus musculus - REFLIST (21988)	upload_1 (6765)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+Ubiquitin proteasome pathway (P00060)	65	55	20.00	+	2.75	1.04E-07	8.71E-06
+B cell activation (P00010)	70	54	21.54	+	2.51	1.06E-06	3.56E-05
+General transcription regulation (P00023)	38	29	11.69	+	2.48	4.09E-04	5.26E-03
+p38 MAPK pathway (P05918)	41	31	12.61	+	2.46	2.41E-04	3.65E-03
+p53 pathway by glucose deprivation (P04397)	24	18	7.38	+	2.44	5.57E-03	4.05E-02
+Cell cycle (P00013)	23	17	7.08	+	2.40	8.01E-03	4.78E-02
+Ras Pathway (P04393)	72	51	22.15	+	2.30	9.59E-06	1.60E-04
+Hypoxia response via HIF activation (P00030)	29	20	8.92	+	2.24	6.62E-03	4.61E-02
+FAS signaling pathway (P00020)	34	23	10.46	+	2.20	4.51E-03	3.42E-02
+Parkinson disease (P00049)	93	62	28.61	+	2.17	5.94E-06	1.42E-04
+Transcription regulation by bZIP transcription factor (P00055)	58	38	17.84	+	2.13	4.22E-04	5.03E-03
+p53 pathway feedback loops 2 (P04398)	51	32	15.69	+	2.04	2.55E-03	2.24E-02
+Toll receptor signaling pathway (P00054)	55	34	16.92	+	2.01	2.37E-03	2.20E-02
+Apoptosis signaling pathway (P00006)	120	74	36.92	+	2.00	5.34E-06	1.49E-04
+CCKR signaling map (P06959)	163	100	50.15	+	1.99	1.57E-07	6.56E-06
+T cell activation (P00053)	88	52	27.07	+	1.92	2.90E-04	4.03E-03
+VEGF signaling pathway (P00056)	67	39	20.61	+	1.89	2.60E-03	2.17E-02
+EGF receptor signaling pathway (P00018)	141	82	43.38	+	1.89	7.86E-06	1.46E-04
+PDGF signaling pathway (P00047)	145	84	44.61	+	1.88	7.05E-06	1.47E-04
+PI3 kinase pathway (P00048)	54	31	16.61	+	1.87	6.89E-03	4.60E-02
+Oxidative stress response (P00046)	56	32	17.23	+	1.86	7.65E-03	4.73E-02
+p53 pathway (P00059)	88	50	27.07	+	1.85	8.17E-04	8.53E-03
+FGF signaling pathway (P00021)	122	65	37.54	+	1.73	5.03E-04	5.60E-03
+Gonadotropin-releasing hormone receptor pathway (P06664)	234	107	71.99	+	1.49	8.21E-04	8.06E-03
+Unclassified (UNCLASSIFIED)	19376	5796	5961.37	-	.97	1.56E-07	8.66E-06
+Alzheimer disease-presenilin pathway (P00004)	125	19	38.46	-	.49	2.94E-03	2.34E-02
+Blood coagulation (P00011)	51	5	15.69	-	.32	7.06E-03	4.53E-02
+Cadherin signaling pathway (P00012)	161	13	49.53	-	.26	4.22E-08	7.04E-06

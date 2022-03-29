@@ -1,0 +1,42 @@
+PANTHER_Pathways	Mus_musculus-REFLIST	upload_1	upload_1(expected)	upload_1(over/under)	upload_1(fold Enrichment)	upload_1(raw P-value)	upload_1(FDR)	method
+Ubiquitin proteasome pathway	65	55	20	+	2.75	1.04E-07	8.71E-06	Deconvolution
+B cell activation	70	54	21.54	+	2.51	1.06E-06	3.56E-05	Deconvolution
+General transcription regulation	38	29	11.69	+	2.48	4.09E-04	5.26E-03	Deconvolution
+p38 MAPK pathway	41	31	12.61	+	2.46	2.41E-04	3.65E-03	Deconvolution
+p53 pathway by glucose deprivation	24	18	7.38	+	2.44	5.57E-03	4.05E-02	Deconvolution
+Cell cycle	23	17	7.08	+	2.4	8.01E-03	4.78E-02	Deconvolution
+Ras Pathway	72	51	22.15	+	2.3	9.59E-06	1.60E-04	Deconvolution
+Hypoxia response via HIF activation	29	20	8.92	+	2.24	6.62E-03	4.61E-02	Deconvolution
+FAS signaling pathway	34	23	10.46	+	2.2	4.51E-03	3.42E-02	Deconvolution
+Parkinson disease	93	62	28.61	+	2.17	5.94E-06	1.42E-04	Deconvolution
+Transcription regulation by bZIP transcription factor	58	38	17.84	+	2.13	4.22E-04	5.03E-03	Deconvolution
+p53 pathway feedback loops 2	51	32	15.69	+	2.04	2.55E-03	2.24E-02	Deconvolution
+Toll receptor signaling pathway	55	34	16.92	+	2.01	2.37E-03	2.20E-02	Deconvolution
+Apoptosis signaling pathway	120	74	36.92	+	2	5.34E-06	1.49E-04	Deconvolution
+CCKR signaling map	163	100	50.15	+	1.99	1.57E-07	6.56E-06	Deconvolution
+T cell activation	88	52	27.07	+	1.92	2.90E-04	4.03E-03	Deconvolution
+VEGF signaling pathway	67	39	20.61	+	1.89	2.60E-03	2.17E-02	Deconvolution
+EGF receptor signaling pathway	141	82	43.38	+	1.89	7.86E-06	1.46E-04	Deconvolution
+PDGF signaling pathway	145	84	44.61	+	1.88	7.05E-06	1.47E-04	Deconvolution
+PI3 kinase pathway	54	31	16.61	+	1.87	6.89E-03	4.60E-02	Deconvolution
+Oxidative stress response	56	32	17.23	+	1.86	7.65E-03	4.73E-02	Deconvolution
+p53 pathway	88	50	27.07	+	1.85	8.17E-04	8.53E-03	Deconvolution
+FGF signaling pathway	122	65	37.54	+	1.73	5.03E-04	5.60E-03	Deconvolution
+Gonadotropin-releasing hormone receptor pathway	234	107	71.99	+	1.49	8.21E-04	8.06E-03	Deconvolution
+Alzheimer disease-presenilin pathway	125	19	38.46	-	0.49	2.94E-03	2.34E-02	Deconvolution
+Blood coagulation	51	5	15.69	-	0.32	7.06E-03	4.53E-02	Deconvolution
+Cadherin signaling pathway	161	13	49.53	-	0.26	4.22E-08	7.04E-06	Deconvolution
+Ubiquitin proteasome pathway	65	57	26.39	+	2.16	3.24E-05	1.35E-03	CPM
+p38 MAPK pathway	41	35	16.64	+	2.1	1.44E-03	2.18E-02	CPM
+B cell activation	70	55	28.42	+	1.94	3.32E-04	6.92E-03	CPM
+Parkinson disease	93	72	37.75	+	1.91	6.37E-05	2.13E-03	CPM
+Ras Pathway	72	55	29.23	+	1.88	5.43E-04	1.01E-02	CPM
+Apoptosis signaling pathway	120	90	48.71	+	1.85	1.62E-05	9.01E-04	CPM
+T cell activation	88	60	35.72	+	1.68	2.56E-03	3.29E-02	CPM
+p53 pathway	88	59	35.72	+	1.65	3.39E-03	4.05E-02	CPM
+CCKR signaling map	163	109	66.17	+	1.65	6.90E-05	1.92E-03	CPM
+EGF receptor signaling pathway	141	94	57.24	+	1.64	2.82E-04	6.72E-03	CPM
+PDGF signaling pathway	145	94	58.86	+	1.6	5.51E-04	9.20E-03	CPM
+Huntington disease	152	91	61.7	+	1.47	4.35E-03	4.85E-02	CPM
+Gonadotropin-releasing hormone receptor pathway	234	135	94.99	+	1.42	1.44E-03	2.01E-02	CPM
+Cadherin signaling pathway	161	20	65.36	-	0.31	1.26E-08	2.11E-06	CPM

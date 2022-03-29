@@ -1,0 +1,27 @@
+
+
+
+
+
+Analysis Type:	PANTHER Overrepresentation Test (Released 20220202)
+Annotation Version and Release Date:	PANTHER version 16.0 Released 2020-12-01
+Analyzed List:	upload_1 (Mus musculus)
+Reference List:	Mus musculus (all genes in database)
+Test Type:	FISHER
+Correction:	FDR
+PANTHER Pathways	Mus musculus - REFLIST (21988)	upload_1 (8926)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+Ubiquitin proteasome pathway (P00060)	65	57	26.39	+	2.16	3.24E-05	1.35E-03
+p38 MAPK pathway (P05918)	41	35	16.64	+	2.10	1.44E-03	2.18E-02
+B cell activation (P00010)	70	55	28.42	+	1.94	3.32E-04	6.92E-03
+Parkinson disease (P00049)	93	72	37.75	+	1.91	6.37E-05	2.13E-03
+Ras Pathway (P04393)	72	55	29.23	+	1.88	5.43E-04	1.01E-02
+Apoptosis signaling pathway (P00006)	120	90	48.71	+	1.85	1.62E-05	9.01E-04
+T cell activation (P00053)	88	60	35.72	+	1.68	2.56E-03	3.29E-02
+p53 pathway (P00059)	88	59	35.72	+	1.65	3.39E-03	4.05E-02
+CCKR signaling map (P06959)	163	109	66.17	+	1.65	6.90E-05	1.92E-03
+EGF receptor signaling pathway (P00018)	141	94	57.24	+	1.64	2.82E-04	6.72E-03
+PDGF signaling pathway (P00047)	145	94	58.86	+	1.60	5.51E-04	9.20E-03
+Huntington disease (P00029)	152	91	61.70	+	1.47	4.35E-03	4.85E-02
+Gonadotropin-releasing hormone receptor pathway (P06664)	234	135	94.99	+	1.42	1.44E-03	2.01E-02
+Unclassified (UNCLASSIFIED)	19376	7663	7865.66	-	.97	6.51E-08	5.43E-06
+Cadherin signaling pathway (P00012)	161	20	65.36	-	.31	1.26E-08	2.11E-06
