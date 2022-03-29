@@ -1,0 +1,296 @@
+source("./scripts//checkLibraries.R")
+source("./scripts/InputFiles_From_Bgee.R")
+
+sampleInfo <- dplyr::filter(rnaSeqLib, speciesId == "10090")
+sampleInfo <- merge(sampleInfo, all_lib_bgee15, by = "libraryId")
+
+kallisto_count_folder <- "./data/Mouse_Select_RefInt_based_anatomical_entity/just_MouseData_AllIntergenic/"
+sum_by_species_folder <- "./data/Mouse_Select_RefInt_based_anatomical_entity/Sum_organized_by_anatomical_entity/"
+species <- "Mus musculus"
+
+## Loop across anatomical entities of mouse data and sum the expression across libraries
+for(anatEntity in unique(sampleInfo$uberonName)){
+  
+  folder <- paste0(sum_by_species_folder,anatEntity)
+  
+  if (file.exists(folder)) {
+    cat("The folder already exists")
+  } else {
+    dir.create(folder)
+  }
+  
+  ## create files number_libraries.txt and gaussian_choice_by_species_TO_FILL.txt
+  number_libraries_file <- file.path(folder,"number_libraries.txt")
+  gaussian_choice_file <- file.path(folder,"gaussian_choice_by_species_TO_FILL.txt")
+  file.create(number_libraries_file)
+  file.create(gaussian_choice_file)
+  ## write header of file number_libraries.txt
+  cat("speciesId\tspeciesName\tnumberLibrariesUsed\tnumberLibraries\n", file = number_libraries_file, sep = "\t")
+  ## write header of file gaussian_choice_by_species.txt
+  cat("speciesId\tnumberGaussiansCoding\tnumberGaussiansIntergenic\tselectedGaussianCoding\tselectionSideCoding\tselectedGaussianIntergenic\tselectionSideIntergenic\tcomment\tannotatorId\n", 
+      file = gaussian_choice_file, sep = "\t")
+  
+  cat(paste0("\nSumming data for ", anatEntity, " (species ID: ", species,")\n"))
+  numLibs = 0
+  
+  ## read tx2gene folder
+  tx2gene <- read.table(mouse_tx2gene, header = TRUE, sep = "\t")
+  colnames(tx2gene) <- c("target_id", "gene_id")
+  gene2biotype <- read.table(mouse_gene2biotype, header = TRUE, sep = "\t")
+  tx2gene <- merge(tx2gene, gene2biotype, by.x = "gene_id", by.y = "id")
+  
+  # create template of data.frame that will contain summed counts and ponderated mean of eff_length
+  firstLibId <- sampleInfo[sampleInfo$uberonName == anatEntity,][1,1]
+  summed <- read.table(file = file.path(kallisto_count_folder, firstLibId, "/abundance.tsv"), header = TRUE, sep = "\t")
+  summed <- merge(x = summed , y = tx2gene, by = "target_id")
+  #sanity check that transcript are always in the same order in abundance files
+  summed <- summed[order(summed$target_id),]
+  ## detect number of transcripts and number of libraries to create matrix with proper size
+  number_transcripts <- nrow(summed)
+  numberLib <- nrow(sampleInfo[sampleInfo$uberonName == anatEntity,])
+  # create data frame at proper size in order not to add new columns for each library
+  effec_length_info <- as.data.frame(matrix(nrow=number_transcripts, ncol=numberLib))
+  raw_counts_info <- as.data.frame(matrix(nrow=number_transcripts, ncol=numberLib))
+  for(libraryId in sampleInfo$libraryId[sampleInfo$uberonName == anatEntity]){
+    ## For each library use the file at transcriptID level
+    file <- file.path(kallisto_count_folder, libraryId, "abundance.tsv")
+    if (file.exists(file)){
+      cat("  Reading the ", libraryId, "\n")
+      numLibs = numLibs + 1
+      ## read transcript level data for each library
+      kallisto_transcript_current <- read.table(file, h=T, sep="\t")
+      #sanity check that transcript are always in the same order in abundance files
+      kallisto_transcript_current <- kallisto_transcript_current[order(kallisto_transcript_current$target_id),]
+      raw_counts_info[,numLibs] <- kallisto_transcript_current$est_counts
+      effec_length_info[,numLibs] <- kallisto_transcript_current$eff_length
+    } else {
+      stop("  No data found from", libraryId, "\n")
+    }
+  }
+  
+  if (numLibs == 1){
+    ## provide output directly from gene level
+    file2 <- paste0(kallisto_count_folder,"/", libraryId, "/abundance_gene_level+fpkm+intergenic.tsv")
+    summed <- read.table(file2, h=T, sep="\t")
+    # add mapping of gene and 
+  } else {
+    ## sum the raw counts for all libraries
+    summed$est_counts <- apply(raw_counts_info, 1, sum)
+    
+    ## calculate effect_length for each transcript by using weighted.mean...
+    calculate_effect_length <- function(counts, effec_length){
+      myWeightedMean <- c()
+      ## transpose the matrix (this means each column is a transcript ID and each row is a library)
+      rawcounts <- t(counts)
+      raw_effeclength <- t(effec_length)
+      
+      for (i in 1:ncol(raw_effeclength)) {
+        if (sum(rawcounts[,i]) == 0 ){
+          ## provide the same weight for a transcript in case the est_count is always zero
+          rawcounts[,i] <- ifelse(rawcounts[,i] == 0, 1)
+          weightedMean <-  weighted.mean(x=raw_effeclength[,i], w=rawcounts[,i])
+          myWeightedMean[i] <- weightedMean
+        } else {
+          weightedMean <-  weighted.mean(x=raw_effeclength[,i], w=rawcounts[,i])
+          myWeightedMean[i] <- weightedMean
+        }
+      }
+      return(myWeightedMean)
+    }
+    ## each row is the weighted.mean of eff_length for each transcriptID
+    summed$eff_length <- as.numeric(as.character(calculate_effect_length(raw_counts_info, effec_length_info)))
+    
+    # calculate effect_length for each transcript by using weighted.mean...
+    ## re-calculate TPM and FPKM after collect the weighted.mean of eff_length for each transcriptID and after sum the est_count for each transcriptID
+    estCount_to_tpm <- function(est_count, effec_length){
+      rate <- log(est_count) - log(effec_length)
+      denom <- log(sum(exp(rate)))
+      exp(rate - denom + log(1e6))
+    }
+    summed$tpm <- as.numeric(as.character(estCount_to_tpm(summed$est_counts, summed$eff_length)))
+    
+    estCount_to_fpkm <- function(est_count, effec_length){
+      N <- sum(est_count)
+      exp( log(est_count) + log(1e9) - log(effec_length) - log(N) )
+    }
+    summed$fpkm <- as.numeric(as.character(estCount_to_fpkm(summed$est_counts, summed$eff_length)))
+    
+    ## select intergenic regions
+    intergenic_regions <- summed[summed$type == "intergenic", c("target_id", "est_counts", "tpm", "fpkm", "type", "biotype")]
+    names(intergenic_regions)[1] <- "gene_id"
+    ## Sum est_counts, TPM and FPKM for genic regions
+    sumGenic <- summed[summed$type == "genic", c("gene_id", "est_counts", "tpm", "fpkm", "type", "biotype")]
+    sumGenic <- aggregate(sumGenic[,2:4], list(sumGenic$gene_id), sum)
+    names(sumGenic)[1] <- "gene_id"
+    sumGenic$type <-  rep("genic", times=length(sumGenic$gene_id))
+    select_genic <- dplyr::filter(summed, type == "genic")
+    select_biotype_genic = distinct(select_genic, gene_id, .keep_all= TRUE)
+    sumGenic$biotype <- select_biotype_genic$biotype
+    ## Final Table with genic and intergenic information
+    summed <- rbind(sumGenic, intergenic_regions)
+  }
+  ## Export number of libraries (and total number of libraries for this anatomical entity) used in this species
+  cat(c(species, numLibs, paste0(length(sampleInfo$libraryId[sampleInfo$uberonName == anatEntity]), "\n")), 
+      file = number_libraries_file, sep = "\t", append = TRUE)
+  
+  ## if no library ws found for this species
+  if (numLibs == 0){
+    cat("  No library found for this species, skipping it.")
+    next
+  }
+  
+  ## Else:
+  cat("  Plotting density of aggregated data\n")
+  ## Density plot of summed data
+  pdf(file = paste0(folder, "/distribution_TPM_genic_intergenic_sum_", species, ".pdf"), width = 6, height = 5)
+  ## par(mar=c(5,6,1,1)) ## bottom, left, top and right margins
+  ## density of log2(TPM) of summed data
+  dens <- density(log2(na.omit(summed$tpm) + 10^-6))
+  ## Subgroups densities. Visualization trick: we add an invisible set of points at x=-30, to make densities comparable
+  ## genic regions
+  dens_genic <- density(c(rep(-30, times=sum(summed$type != "genic")), log2(summed$tpm[summed$type == "genic"] + 10^-6)))
+  ## protein-coding genes only (had to take care of NAs strange behavior)
+  dens_coding <- density(c(rep(-30, times=sum(!summed$biotype %in% "protein_coding")), log2(summed$tpm[summed$biotype %in% "protein_coding"] + 10^-6)))
+  ## intergenic
+  dens_intergenic <- density(c(rep(-30, times=sum(summed$type != "intergenic")), log2(summed$tpm[summed$type == "intergenic"] + 10^-6)))
+  ## Plot whole distribution
+  plot(dens, ylim=c(0, max(c(dens$y, dens_genic$y[dens_genic$x > -15], dens_coding$y[dens_coding$x > -15], dens_intergenic$y[dens_intergenic$x > -15]))*1.1), xlim=c(-23, 21), lwd=2, main=paste0(anatEntity, " (", numLibs, " libraries)"), bty="n", axes=T, xlab="log2(TPM + 10^-6)")
+  mtext(species)
+  ## Add subgroups distributions (genic, intergenic, etc):
+  ## genic
+  lines(dens_genic, col="firebrick3", lwd=2)
+  ## protein-coding genes
+  lines(dens_coding, col="firebrick3", lwd=2, lty=2)
+  ## intergenic
+  lines(dens_intergenic, col="dodgerblue3", lwd=2)
+  ## legend
+  legend("topleft", c(paste0("all (", length(summed[,1]),")"), paste0("genic (", sum(summed$type == "genic"), ")"), paste0("coding (", sum(summed$biotype %in% "protein_coding"), ")"), paste0("intergenic (", sum(summed$type == "intergenic"), ")")), lwd=2, col=c("black", "firebrick3", "firebrick3", "dodgerblue3"), lty=c(1, 1, 2, 1), bty="n")
+  dev.off()
+  
+  ## Redo plot for log2(FPKMs) (probably not proportional anymore)
+  pdf(file = paste0(folder, "/distribution_FPKM_genic_intergenic_sum_", species, ".pdf"), width = 6, height = 5)
+  ## par(mar=c(5,6,1,1)) ## bottom, left, top and right margins
+  ## FPKM density of summed data
+  dens <- density(log2(na.omit(summed$fpkm) + 10^-6))
+  ## Subgroups densities. Visualization trick: we add an invisible set of points at x=-30, to make densities comparable
+  ## genic regions
+  dens_genic <- density(c(rep(-30, times=sum(summed$type != "genic")), log2(summed$fpkm[summed$type == "genic"] + 10^-6)))
+  ## protein-coding genes only (had to take care of NAs strange behavior)
+  dens_coding <- density(c(rep(-30, times=sum(!summed$biotype %in% "protein_coding")), log2(summed$fpkm[summed$biotype %in% "protein_coding"] + 10^-6)))
+  ## intergenic
+  dens_intergenic <- density(c(rep(-30, times=sum(summed$type != "intergenic")), log2(summed$fpkm[summed$type == "intergenic"] + 10^-6)))
+  ## Plot whole distribution
+  plot(dens, ylim=c(0, max(c(dens$y, dens_genic$y[dens_genic$x > -15], dens_coding$y[dens_coding$x > -15], dens_intergenic$y[dens_intergenic$x > -15]))*1.1), xlim=c(-23, 21), lwd=2, main=paste0(anatEntity, " (", numLibs, " libraries)"), bty="n", axes=T, xlab="log2(FPKM + 10^-6)")
+  mtext(species)
+  ## Add subgroups distributions (genic, intergenic, etc):
+  ## genic
+  lines(dens_genic, col="firebrick3", lwd=2)
+  ## protein-coding genes
+  lines(dens_coding, col="firebrick3", lwd=2, lty=2)
+  ## intergenic
+  lines(dens_intergenic, col="dodgerblue3", lwd=2)
+  ## legend
+  legend("topleft", c(paste0("all (", length(summed[,1]),")"), paste0("genic (", sum(summed$type == "genic"), ")"), paste0("coding (", sum(summed$biotype %in% "protein_coding"), ")"), paste0("intergenic (", sum(summed$type == "intergenic"), ")")), lwd=2, col=c("black", "firebrick3", "firebrick3", "dodgerblue3"), lty=c(1, 1, 2, 1), bty="n")
+  dev.off()
+  
+  ## Redo plot for log(read counts)
+  pdf(file = paste0(folder, "/distribution_counts_genic_intergenic_sum_", species, ".pdf"), width = 6, height = 5)
+  ## par(mar=c(5,6,1,1)) ## bottom, left, top and right margins
+  ## density of read counts on summed data
+  dens <- density(log2(na.omit(summed$est_counts) + 1))
+  ## Subgroups densities. Visualization trick: we add an invisible set of points at x=-10, to make densities comparable
+  ## genic regions
+  dens_genic <- density(c(rep(-10, times=sum(summed$type != "genic")), log2(summed$est_counts[summed$type == "genic"] + 1)))
+  ## protein-coding genes only (had to take care of NAs strange behavior)
+  dens_coding <- density(c(rep(-10, times=sum(!summed$biotype %in% "protein_coding")), log2(summed$est_counts[summed$biotype %in% "protein_coding"] + 1)))
+  ## intergenic
+  dens_intergenic <- density(c(rep(-10, times=sum(summed$type != "intergenic")), log2(summed$est_counts[summed$type == "intergenic"] + 1)))
+  ## Plot whole distribution
+  plot(dens, ylim=c(0, max(c(dens$y, dens_genic$y[dens_genic$x > -15], dens_coding$y[dens_coding$x > -15], dens_intergenic$y[dens_intergenic$x > -15]))*1.1), xlim=c(-1, 20), lwd=2, main=paste0(anatEntity, " (", numLibs, " libraries)"), bty="n", axes=T, xlab="log2(read counts + 1)")
+  mtext(species)
+  ## Add subgroups distributions (genic, intergenic, etc):
+  ## genic
+  lines(dens_genic, col="firebrick3", lwd=2)
+  ## protein-coding genes
+  lines(dens_coding, col="firebrick3", lwd=2, lty=2)
+  ## intergenic
+  lines(dens_intergenic, col="dodgerblue3", lwd=2)
+  ## legend
+  legend("topleft", c(paste0("all (", length(summed[,1]),")"), paste0("genic (", sum(summed$type == "genic"), ")"), paste0("coding (", sum(summed$biotype %in% "protein_coding"), ")"), paste0("intergenic (", sum(summed$type == "intergenic"), ")")), lwd=2, col=c("black", "firebrick3", "firebrick3", "dodgerblue3"), lty=c(1, 1, 2, 1), bty="n")
+  dev.off()
+  
+  
+  ## Deconvolute TPM intergenic and genic distributions
+  ## As in Hebenstreit 2011 Mol Syst Biol: use clustering approach
+  ## Mclust: Normal Mixture Modelling for Model-Based Clustering, Classification, and Density Estimation
+  ## We do not chose the number of gaussians, and let mclust choose
+  cat("  Deconvoluting sub-distributions of genic and intergenic regions\n")
+  library(mclust)
+  
+  ## Focus on regions with enough signal (remove TPM = 0 or very small)
+  summed_filtered <- summed[summed$tpm > 10^-6, ]
+  
+  ## open PDF device
+  pdf(file = paste0(folder, "/distribution_TPM_genic_intergenic_sum_deconvolution_", species, ".pdf"), width = 6, height = 5)
+  
+  set.seed(123)
+  ## Coding regions
+  mod1 = densityMclust(log2(summed_filtered$tpm[summed_filtered$biotype %in% "protein_coding"]))
+  plot(mod1, what = "BIC")
+  cat("    Protein-coding genes:\n")
+  print(summary(mod1, parameters = TRUE))
+  plot(mod1, what = "density", data = log2(summed_filtered$tpm[summed_filtered$biotype %in% "protein_coding"]), breaks = 100, xlab="log2(TPM) - protein-coding genes")
+  
+  ## Intergenic regions
+  mod2 = densityMclust(log2(summed_filtered$tpm[summed_filtered$type == "intergenic"]))
+  plot(mod2, what = "BIC")
+  cat("    Intergenic regions:\n")
+  print(summary(mod2, parameters = TRUE))
+  plot(mod2, what = "density", data = log2(summed_filtered$tpm[summed_filtered$type == "intergenic"]), breaks = 100, xlab="log2(TPM) - intergenic")
+  
+  ## Plot the density of the original data, and the density of regions classified to different gaussians
+  cat("  Plotting density of deconvoluted genic and intergenic regions\n")
+  dens <- density(log2(summed_filtered$tpm))
+  ## Plot whole distribution
+  plot(dens, ylim=c(0, max(dens$y)*1.1), xlim=c(-20, 20), lwd=2, main=paste0(anatEntity, " (", numLibs, " libraries)"), bty="n", axes=T, xlab="log2(TPM)")
+  mtext(species)
+  ## protein-coding genes only (had to take care of NAs strange behavior)
+  dens_coding <- density(log2(summed_filtered$tpm[summed_filtered$biotype %in% "protein_coding"]))
+  ## Normalize density for number of observations
+  dens_coding$y <- dens_coding$y * sum(summed_filtered$biotype %in% "protein_coding") / length(summed_filtered$tpm)
+  lines(dens_coding, col="firebrick3", lwd=2, lty=2)
+ 
+  dens_intergenic <- density(log2(summed_filtered$tpm[summed_filtered$type == "intergenic"]))
+  dens_intergenic$y <- dens_intergenic$y * sum(summed_filtered$type == "intergenic") / length(summed_filtered$tpm)
+  lines(dens_intergenic, col="dodgerblue3", lwd=2)
+  for (i in 1:mod2$G){
+    ## if any point classified
+    if (sum(mod2$classification == i) >= 2){
+      dens_intergenic_sub <- density(log2(summed_filtered$tpm[summed_filtered$type == "intergenic"][mod2$classification == i]))
+      ## y-axis scaling
+      dens_intergenic_sub$y <- dens_intergenic_sub$y * length(summed_filtered$tpm[summed_filtered$type == "intergenic"][mod2$classification == i]) / length(summed_filtered$tpm)
+      lines(dens_intergenic_sub, col=paste0("grey", trunc(100/(mod2$G+1))*i), lwd=2)
+      ## Print gaussian number on plot: at location of max value of gaussian
+      text(dens_intergenic_sub$x[dens_intergenic_sub$y == max(dens_intergenic_sub$y)], 0.005, labels = i, col=paste0("grey", trunc(100/(mod2$G+1))*i))
+    }
+  }
+  ## legend
+  legend("topleft", c(paste0("all (", length(summed_filtered[,1]),")"), paste0("coding (", sum(summed_filtered$biotype %in% "protein_coding"), ")"), paste0("intergenic (", sum(summed_filtered$type == "intergenic"), ")")), lwd=2, col=c("black", "firebrick3", "dodgerblue3"), lty=c(1, 2, 1), bty="n")
+  dev.off()
+  
+  ## Export file with summed data and classification of intergenic and coding regions
+  cat("  Exporting aggregated data and classification of coding and intergenic regions\n")
+  ## Add new column to summed object
+  summed$classification <- NA
+  summed$classification[summed$tpm > 10^-6 & summed$biotype %in% "protein_coding"] <- paste("coding_", mod1$classification, sep="")
+  summed$classification[summed$tpm > 10^-6 & summed$type == "intergenic"] <- paste("intergenic_", mod2$classification, sep="")
+  write.table(summed, file = paste0(folder, "/sum_abundance_gene_level+fpkm+intergenic+classification_", species, ".tsv"), quote = FALSE, sep = "\t", col.names = TRUE, row.names = FALSE)
+  
+  ## Export file with speciesId and number of coding and intergenic gaussians (to be filled manually with selected gaussians)
+  cat(paste0(species, "\t", mod1$G, "\t", mod2$G, "\n"), file = gaussian_choice_file, sep = "\t", append=T)
+  
+  rm(summed)
+  rm(summed_filtered)
+  rm(numLibs)
+}
+
