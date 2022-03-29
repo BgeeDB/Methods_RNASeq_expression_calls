@@ -1,0 +1,2 @@
+speciesId	speciesName	numberLibrariesUsed	numberLibraries
+8010	Esox lucius	24	24

@@ -1,0 +1,2 @@
+speciesId	speciesName	numberLibrariesUsed	numberLibraries
+8010	24	24

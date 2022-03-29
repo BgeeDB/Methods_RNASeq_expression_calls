@@ -1,0 +1,2 @@
+speciesId	organism	numberGaussiansCoding	numberGaussiansIntergenic	selectedGaussianCoding	selectionSideCoding	selectedGaussianIntergenic	selectionSideIntergenic	comment	annotatorId
+8010	3	5
