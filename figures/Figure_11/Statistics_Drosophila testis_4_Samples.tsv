@@ -1,0 +1,43 @@
+$`Inflection point BH`
+[1] 0.000936766
+
+$`TPR and FPR for inflection point BH`
+   valueTreshold TP FP TN FN       TPR        FPR
+30   0.000936766 27  3 85 10 0.7297297 0.03409091
+
+$`Inflection point FDR_inverse`
+[1] 0.008611582
+
+$`TPR and FPR for inflection point FDR_inverse`
+   valueTreshold TP FP  TN FN       TPR        FPR
+39   0.008611582 35  4 116  2 0.9459459 0.03333333
+
+$`TPR and FPR for inflection point zigzag`
+   valueTreshold TP FP  TN FN       TPR        FPR
+90         0.668 35  5 115  2 0.9459459 0.04166667
+89         0.635 35  6 114  2 0.9459459 0.05000000
+88         0.622 35  7 113  2 0.9459459 0.05833333
+87         0.616 35  8 112  2 0.9459459 0.06666667
+86         0.614 35  9 111  2 0.9459459 0.07500000
+85         0.560 35 10 110  2 0.9459459 0.08333333
+84         0.551 35 11 109  2 0.9459459 0.09166667
+
+$`BH threshold of pValue < 0.05`
+[1] 0.04933763
+
+$`TPR and FPR for BH threshold of pValue < 0.05`
+   valueTreshold TP FP TN FN TPR       FPR
+63    0.04933763 37 26 62  0   1 0.2954545
+
+$`FDR_inverse cut off for 5% of false discovery rate`
+[1] 0.01273597
+
+$`TPR and FPR for a cut off using 5% of false discovery rate`
+   valueTreshold TP FP  TN FN      TPR   FPR
+45    0.01220667 36  9 111  1 0.972973 0.075
+
+$`TPR and FPR for a threshold >= 0.95`
+    valueTreshold TP FP  TN FN       TPR         FPR
+107         0.962 21  1 119 16 0.5675676 0.008333333
+106         0.959 21  2 118 16 0.5675676 0.016666667
+
