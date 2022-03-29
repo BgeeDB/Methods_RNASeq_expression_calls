@@ -1,0 +1,20 @@
+$Decov_0.05
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  37.96   62.97   68.11   65.95   70.51   77.19 
+
+$Decov_0.01
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  26.03   57.70   63.38   60.83   65.81   71.12 
+
+$Decov_0.001
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  10.31   51.23   56.98   54.09   59.90   65.51 
+
+$Without_Decov
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  37.66   61.08   66.31   64.39   68.78   75.48 
+
+$TPM
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  19.30   45.74   52.95   50.75   57.80   61.95 
+

@@ -1,0 +1,78 @@
+$`Pearson correlation: median coding TPM vs. Proportion non coding`
+
+	Pearson's product-moment correlation
+
+data:  collectInfoMedian$medianCodingTPM and collectInfoMedian$Proportion_NoCoding
+t = 1.4346, df = 50, p-value = 0.1576
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.0783141  0.4474560
+sample estimates:
+      cor 
+0.1988357 
+
+
+$`Spearman correlation: median coding TPM vs. Proportion non coding`
+
+	Spearman's rank correlation rho
+
+data:  collectInfoMedian$medianCodingTPM and collectInfoMedian$Proportion_NoCoding
+S = 20806, p-value = 0.4288
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.1118415 
+
+
+$`Pearson correlation: median coding deconvolution vs. Proportion non coding`
+
+	Pearson's product-moment correlation
+
+data:  collectInfoMedian$medianCodingIntDev and collectInfoMedian$Proportion_NoCoding
+t = 3.081, df = 50, p-value = 0.00335
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.1420268 0.6062579
+sample estimates:
+     cor 
+0.399445 
+
+
+$`Spearman correlation: median coding deconvolution vs. Proportion non coding`
+
+	Spearman's rank correlation rho
+
+data:  collectInfoMedian$medianCodingIntDev and collectInfoMedian$Proportion_NoCoding
+S = 15622, p-value = 0.01621
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.3331341 
+
+
+$`Pearson correlation: median coding without deconvolution vs. Proportion non coding`
+
+	Pearson's product-moment correlation
+
+data:  collectInfoMedian$medianCodingWithoutintDev and collectInfoMedian$Proportion_NoCoding
+t = 8.2744, df = 50, p-value = 6.28e-11
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.6148864 0.8556113
+sample estimates:
+      cor 
+0.7602198 
+
+
+$`Spearman correlation: median coding without deconvolution vs. Proportion non coding`
+
+	Spearman's rank correlation rho
+
+data:  collectInfoMedian$medianCodingWithoutintDev and collectInfoMedian$Proportion_NoCoding
+S = 6480, p-value = 3.719e-09
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.7233843 
+
+

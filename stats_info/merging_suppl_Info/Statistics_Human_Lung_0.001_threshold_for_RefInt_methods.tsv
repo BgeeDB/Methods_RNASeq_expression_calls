@@ -1,0 +1,8 @@
+$`TPR and FPR for BH threshold of pValue < 0.001`
+     valueTreshold   TP   FP   TN FN       TPR       FPR
+9327    0.00099737 7213 2114 2267  7 0.9990305 0.4825382
+
+$`TPR and FPR for a cut off using 0.1% of false discovery rate`
+    valueTreshold   TP  FP   TN  FN      TPR       FPR
+355  3.820818e-05 7091 969 3466 129 0.982133 0.2184893
+

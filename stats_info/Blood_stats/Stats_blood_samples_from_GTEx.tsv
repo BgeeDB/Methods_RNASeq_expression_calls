@@ -1,0 +1,7 @@
+$`Summary stats for proportion of blood genes`
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+ 0.08521 19.74729 34.13852 37.19222 52.77517 85.63711 
+
+$`Correlation Sum reads for blood genes versus expressed genes`
+[1] 0.2087981
+
