@@ -59,6 +59,3 @@ targetBased <- fread("./data/Droplet_scRNA-Seq/All_FINAL_RESULTS/All_cellPopulat
 ## scRNA-Seq library file
 scRNAlibraryInfo <- read.table("./data/Data_generated_By_Bgee/scRNASeqLibrary.tsv", header=TRUE, sep="\t")
 colnames(scRNAlibraryInfo)[1] <- "libraryId"
-
-
-

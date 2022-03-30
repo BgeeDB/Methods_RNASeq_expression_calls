@@ -49,5 +49,3 @@ graph <- ggplot(speciesData, aes(x=approach, y=proportionCodingPresent, fill=cut
 pdf(file = file.path(outputFolder, paste0("Protein_Coding_Present_", speciesName, ".pdf")),width = 10, height = 4) 
 print(graph)
 dev.off()
-  
-

@@ -147,7 +147,5 @@ plotROC_all_methods <- function(outputfolder, species_tissue, infoSamples, FDRIn
                               "BH threshold of pValue < 0.05",  "TPR and FPR for BH threshold of pValue < 0.05", "FDR_inverse cut off for 5% of false discovery rate", "TPR and FPR for a cut off using 5% of false discovery rate",
                               "TPR and FPR for a threshold >= 0.95")
   capture.output(collectAllStats, file = file.path(outputfolder,paste0("Statistics_",species_tissue, "_",infoSamples,".tsv")))
-  
-  
- 
+
 }

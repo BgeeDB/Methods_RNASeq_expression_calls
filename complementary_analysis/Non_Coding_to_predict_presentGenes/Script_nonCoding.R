@@ -92,14 +92,3 @@ names(collectAllStats) <- c("Pearson correlation: median coding TPM vs. Proporti
                             "Pearson correlation: median coding deconvolution vs. Proportion non coding", "Spearman correlation: median coding deconvolution vs. Proportion non coding",
                             "Pearson correlation: median coding without deconvolution vs. Proportion non coding", "Spearman correlation: median coding without deconvolution vs. Proportion non coding")
 capture.output(collectAllStats, file = file.path(outputFolder,"NonCoding_to_predictPresentGenes.tsv"))
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,6 @@ for (i in ids) {
   speciesName <- as.character(unique(all_lib_bgee15$organism[all_lib_bgee15$speciesId == i]))
   numberLibs <- length(all_lib_bgee15$libraryId[all_lib_bgee15$speciesId == i])
   
-  
   pdf(file = paste0(outputFolder, "/distribution_TPM_genic_intergenic_sum_", i, ".pdf"), width = 6, height = 5)
   ## density of log2(TPM) of summed data
   dens <- density(log2(na.omit(summed$tpm) + 10^-6))

@@ -90,4 +90,3 @@ pearsonPlot <- ggplot(getAllInfo,
 pdf(paste0(outputFolder, "Pearson_correlation_GTEx.pdf"), width = 8, height = 6)
 print(pearsonPlot)
 dev.off()
-

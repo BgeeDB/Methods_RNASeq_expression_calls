@@ -49,9 +49,3 @@ g2 <- ggplot(allInfoCPMcalls, aes(organism, proportionPC, fill = organism)) +
                      axis.line = element_line(colour = "black"),legend.position = "none")
 g2
 dev.off()
-
-
-
-
-
-

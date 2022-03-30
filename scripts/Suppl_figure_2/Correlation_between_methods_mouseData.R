@@ -84,6 +84,3 @@ mtext(paste0("Correlation = " ,round(cor(getAll$pvalue_deconv_0.05, getAll$tpm, 
 plot(getAll$pvalue_Withoutdeconv_0.05, getAll$tpm, pch=20,xlab="Without deconv.", ylab="TPM threshold")
 mtext(paste0("Correlation = " ,round(cor(getAll$pvalue_Withoutdeconv_0.05, getAll$tpm, method = c("pearson")),2)))
 dev.off()
-
-
-

@@ -75,7 +75,3 @@ lines(dens_intergenic,col="darkblue", lwd=2)
 lines(dens_Refintergenic,col="cyan", lwd=2)
 legend("topright", legend = c("All", "Genic" ,"Protein coding", "Intergenic", "Ref_Intergenic"), col=c("black", "red", "indianred", "darkblue", "cyan"),lty=c(1,1,1,1,1), lwd=2, bty = "n")
 dev.off()
-
-
-
-

@@ -1,7 +1,6 @@
 source("./scripts/checkLibraries.R")
 source("./scripts/InputFiles_for_benchmark.R")
 
-
 librarySamplesDrosophilaTestis <- c("SRX1720958", "SRX1720957", "SRX493999", "SRX493950", "SRX109279", "SRX109278")
 
 librarySamplesHumanLung <- c("SRX4794949","SRX4794942","SRX4794906","SRX4794874","SRX4794873","SRX4794872","SRX4794871",
@@ -193,7 +192,6 @@ for (i in cutoff) {
   collectTPM <- rbind(collectTPM, getInfo)
 }
 
-
 allInterg_RefInt <- rbind(collectAllInt, collectRefInt)
 allInterg_RefInt <- allInterg_RefInt %>% select(TPR_pValue, FPR_pvalue, TPR_BH, FPR_BH, approach, cutoff)
 colnames(allInterg_RefInt) <- c("TPR", "FPR", "TPR_BH", "FPR_BH", "Approach", "cutoff")
@@ -224,5 +222,3 @@ g2 <- ggplot(tpm_approach, aes(x = Approach, y = value, linetype = factor(variab
 pdf(file = file.path(outputFolder,"DrosophilaTestis_with_and_without_BH_correction.pdf"),width = 16, height = 8) 
 grid.arrange(g1, g2, nrow = 1)
 dev.off()
-
-

@@ -70,5 +70,3 @@ for (i in 1:max(values_G_mclust)) {
 legend("topleft", legend =  c(paste0("coding (", sum(summed_filtered$biotype %in% "protein_coding"), ")"), paste0("intergenic (", sum(summed_filtered$type == "intergenic"), ")")), lwd=2, col=c("firebrick3", "dodgerblue3"), lty=c(2,1), bty="n")
 abline(v=log2(max_TPM), col="gray", lty=2, lwd=2)
 dev.off()
-
-

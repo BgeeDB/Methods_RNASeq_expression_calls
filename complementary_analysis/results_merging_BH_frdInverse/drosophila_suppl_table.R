@@ -41,7 +41,6 @@ collectStats_merging <- function(outputFolder, bh, fdr_inverse, cutoff){
 
 }
 
-## Plot ROC using BH and fdr_inverse for 6 samples
 collectData <- collectInfoMethods(TP_TN_file=TP_TN_file, bh_file=bh_file_0.001, fdr_inverse_file=fdr_inverse_file_0.001, zigzag_file=NULL)
 
 selectTable <- collectData[[2]]
@@ -72,14 +71,3 @@ fdr_inverse <- fdr_inverse[order(as.numeric(fdr_inverse$TPR)),]
 fdr_inverse_auc <- trapezoid(x=as.numeric(fdr_inverse$FPR), as.numeric(fdr_inverse$TPR))
 
 collectStats_merging(outputFolder = outputFolder, bh=bh, fdr_inverse=fdr_inverse, cutoff=0.0001)
-
-
-
-
-
-
-
-
-
-
-

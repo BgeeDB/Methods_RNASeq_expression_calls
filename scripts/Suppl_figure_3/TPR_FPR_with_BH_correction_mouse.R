@@ -9,7 +9,6 @@ librarySamplesMouseLiver <- c("ERX012346","ERX012361","ERX012364","ERX012370","E
                               "SRX3050419","SRX3050420","SRX3050421","SRX3050422","SRX3050423", "SRX3050424","SRX3050425","SRX3050426","SRX3050427","SRX3050428","SRX3050429","SRX3050430","SRX3050431",
                               "SRX3050432","SRX3050433","SRX3050434","SRX3050435","SRX3050436","SRX3050437","SRX3050438","SRX3050439","SRX3050440")
 
-
 ## save output
 outputFolder <- file.path("./figures/Suppl_figure_3/")
 if (!dir.exists(outputFolder)){

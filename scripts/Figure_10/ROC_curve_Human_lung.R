@@ -54,9 +54,3 @@ zigzag <- zigzag[order(as.numeric(zigzag$TPR)),]
 zigzag_auc <- trapezoid(x=as.numeric(zigzag$FPR), as.numeric(zigzag$TPR))
 
 plotROC_all_methods(outputfolder = outputFolder, species_tissue = "Human lung",  infoSamples = "23_Samples", FDRInverse_cutoff = collectData[[1]], bh = bh, bh_auc = bh_auc, fdr_inverse = fdr_inverse, fdr_inverse_auc = fdr_inverse_auc, zigzag = zigzag, zigzag_auc = zigzag_auc)
-
-
-
-
-
-

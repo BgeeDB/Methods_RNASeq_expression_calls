@@ -104,8 +104,3 @@ p <- ggplot(data=allInfo, aes(x=Proportion_NonCoding, y=Proportion_RefIntergenic
                      axis.line = element_line(colour = "black"),legend.position = "none")
 p
 dev.off()
-
-
-
-
-

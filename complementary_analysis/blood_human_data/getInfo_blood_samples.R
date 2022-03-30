@@ -44,7 +44,3 @@ getCorrelation <- cor(collectInformation$reads_blood_genes, collectInformation$G
 collectAllStats <- list(summaryBlood, getCorrelation)
 names(collectAllStats) <- c("Summary stats for proportion of blood genes", "Correlation Sum reads for blood genes versus expressed genes")
 capture.output(collectAllStats, file = file.path(outputFolder,"Stats_blood_samples_from_GTEx.tsv"))
-
-
-
-

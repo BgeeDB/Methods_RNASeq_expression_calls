@@ -88,31 +88,3 @@ Rscript /Copy_all_repository/scripts/Suppl_figure_11/ProportionNonCoding_vs_Prop
 
 ## Suppl figure 12: CG content 
 Rscript /Copy_all_repository/scripts/Suppl_figure_12/CG_content_all_species.R
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

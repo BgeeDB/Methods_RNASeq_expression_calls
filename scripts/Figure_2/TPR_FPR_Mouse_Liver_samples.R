@@ -126,8 +126,3 @@ graphic_B <- ggplot(allData_TPM, aes(x = Approach, y = value, linetype = factor(
 
 grid.arrange(graphic_A, graphic_B, nrow = 1)
 dev.off()
- 
-
-
-
-

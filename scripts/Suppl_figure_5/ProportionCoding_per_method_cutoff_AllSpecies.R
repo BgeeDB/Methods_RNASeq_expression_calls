@@ -35,7 +35,6 @@ without_deconv <- without_deconv %>% dplyr::select(libraryId, proportionCodingPr
 without_deconv$approach <- "Without deconvolution"
 without_deconv$cutoff <- "0.05"
 
-
 ################ re-organize big table
 allInfo <- rbind(tpm_threshold, deconv_pValue_0.001, deconv_pValue_0.01, deconv_pValue_0.05, without_deconv)
 allInfo$approach <- gsub("pValueCutoff", "Deconvolution p-value approach", allInfo$approach)
@@ -64,5 +63,3 @@ for (i in unique(allInfo$speciesId)) {
 
 ## export table with information about % coding genes per library per method and cutoff
 write.table(allInfo, file = file.path("./stats_info/All_species/CodingGenes_callPresent_per_Library.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
-
-
