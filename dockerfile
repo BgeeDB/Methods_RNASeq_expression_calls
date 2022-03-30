@@ -31,5 +31,6 @@ RUN apt-get update \
 # copy all directory (Methods_RNASeq_expression_calls) to docker destination
 COPY data/ /Copy_all_repository/data/
 COPY scripts/ /Copy_all_repository/scripts/
+WORKDIR /Copy_all_repository
 # Start with batch script by default
 CMD ["/Copy_all_repository/scripts/call_all_Rscripts.sh"]
