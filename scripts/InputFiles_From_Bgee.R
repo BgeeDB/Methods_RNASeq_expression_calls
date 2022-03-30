@@ -38,6 +38,7 @@ RNA_scRNA <- read.table("./data/Calls_expression/RNA+scRNA_Calls_PresenceAbsence
 callExpression <- read.table("./data/Calls_expression/summary_Stats_All_Libraries_Used_Combining_process_for_pValue_and_qValue_method.tsv", header=TRUE, sep="\t")
 
 ## Droplet-based analysis (one cell + cell population)
+unzip("./data/Droplet_scRNA-Seq/All_FINAL_RESULTS/SRX6060813/Normalized_Counts_B-cell_CL-0000236.tsv.zip", exdir="./data/Droplet_scRNA-Seq/All_FINAL_RESULTS/SRX6060813/")
 oneCell <- fread("./data/Droplet_scRNA-Seq/All_FINAL_RESULTS/SRX6060813/Normalized_Counts_B-cell_CL-0000236.tsv", header=TRUE, sep="\t")
 oneCell$gene_id <- gsub("-", "_", oneCell$gene_id)
 

@@ -22,5 +22,5 @@ folderDrosTestisRefInt <- "./data/DrosophilaData_allLibraries_for_benchmark/Dros
 
 
 ## TPM input files (collected from Bgee 15) used in zigzag method
-humanData <- read.table("./data/Combining_process/Input_files_used_zigzag/Human_all_lung_samples.tsv", header=TRUE, sep="\t")
-flyData <- read.table("./data/Combining_process/Input_files_used_zigzag/Drosophila_all_testis_samples.tsv", header=TRUE, sep="\t")
+humanData <- read.table("./complementary_analysis/zigzag/Input_files_zigzag/Human_all_lung_samples_TPM_Bgee15.tsv", header=TRUE, sep="\t")
+flyData <- read.table("./complementary_analysis/zigzag/Input_files_zigzag/Drosophila_all_testis_samples_TPM_Bgee15.tsv", header=TRUE, sep="\t")
