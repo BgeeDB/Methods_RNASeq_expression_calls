@@ -93,7 +93,7 @@ A container was build to regenerate all statistical files and figures without ha
 
 Pull the docker container
 ```
-docker pull methods_rnaseq_expression_calls:0.1
+docker pull bgeedb/methods_rnaseq_expression_calls
 ```
 
 #### <a name="run"></a>run it
