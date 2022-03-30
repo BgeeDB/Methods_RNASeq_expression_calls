@@ -2,7 +2,7 @@ source("./scripts/ROC_AUC.R")
 
 TP_TN_file <- "./data/benchmark_files/TP_TN_usingJust_ProteinCoding_TP_filter_TN_others.tsv"
 bh_file_0.001 <- "./complementary_analysis/results_merging_BH_frdInverse/Mouse/Calls_merging_BH_cutoff=0.001_species_id=10090.tsv"
-fdr_inverse_file_0.001 <- "./complementary_analysis/results_merging_BH_frdInverse/Human/Calls_merging_fdr_inverse_cutoff=0.001_species_id=9606.tsv"
+fdr_inverse_file_0.001 <- "./complementary_analysis/results_merging_BH_frdInverse/Mouse/Calls_merging_fdr_inverse_cutoff=0.001_species_id=10090.tsv"
 
 bh_file_0.0001 <- "./complementary_analysis/results_merging_BH_frdInverse/Mouse/Calls_merging_BH_cutoff=1e-04_species_id=10090.tsv"
 fdr_inverse_file_0.0001 <- "./complementary_analysis/results_merging_BH_frdInverse/Mouse/Calls_merging_fdr_inverse_cutoff=1e-04_species_id=10090.tsv"
