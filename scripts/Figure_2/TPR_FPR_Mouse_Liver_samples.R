@@ -1,5 +1,4 @@
 source("./scripts//checkLibraries.R")
-source("./scripts/InputFiles_From_Bgee.R")
 source("./scripts/InputFiles_for_benchmark.R")
 
 
