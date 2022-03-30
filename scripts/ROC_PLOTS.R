@@ -1,3 +1,4 @@
+source("./scripts/checkLibraries.R")
 
 plotROC_without_zigzag <- function(outputfolder, species_tissue, infoSamples, FDRInverse_cutoff, bh, bh_auc, fdr_inverse, fdr_inverse_auc){
  

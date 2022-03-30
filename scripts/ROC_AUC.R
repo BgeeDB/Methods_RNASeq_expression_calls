@@ -1,3 +1,5 @@
+source("./scripts/checkLibraries.R")
+
 ## ROC function
 ROC <- function(table, method){
   
