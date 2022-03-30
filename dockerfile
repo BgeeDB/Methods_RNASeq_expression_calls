@@ -23,6 +23,10 @@ RUN apt-get update \
     && echo '# Install R libraries from CRAN' \
     && echo '# First install dependencies: nloptr for ggpubr package' \
     && R -e 'install.packages("ggpubr")' \
+    && R -e 'install.packages("UpSetR")' \
+    && R -e 'install.packages("stringr")' \
+    && R -e 'install.packages("skimr")' \
+    && R -e 'install.packages("inflection")' \
     && R -e 'install.packages("stringi")'
 # copy all directory (Methods_RNASeq_expression_calls) to docker destination
 COPY data/ /Copy_all_repository/data/

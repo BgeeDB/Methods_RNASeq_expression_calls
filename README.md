@@ -7,7 +7,7 @@ Sara S. Fonseca Costa, Marta Rosikiewic, Julien Roux, Julien Wollbrett, Frederic
 
 The paper can be found on [bioRxiv]().
 
-=====================================================================================================================
+===============================================================================
 
 
 *   [The repository organization](#repository)
