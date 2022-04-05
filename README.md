@@ -105,13 +105,13 @@ mkdir -p $HOME/docker_results/
 
 Run the container in order to get a particular file or figure of the paper.
 ```
-docker run --rm -it --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/figures/ --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/stats_info/ methods_rnaseq_expression_calls:0.1 Rscript /Copy_all_repository/scripts/Figure_9/barplot_panther_pathways.R
+docker run --rm -it --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/figures/ --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/stats_info/ bgeedb/methods_rnaseq_expression_calls Rscript /Copy_all_repository/scripts/Figure_9/barplot_panther_pathways.R
 ```
 
 Run the container in order to get all files and figures from the analysis realized for the calls paper. Note that this process can take some time.
 
 ```
-docker run --rm -it --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/figures/ --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/stats_info/ methods_rnaseq_expression_calls:0.1
+docker run --rm -it --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/figures/ --mount type=bind,source=$HOME/docker_results/,target=/Copy_all_repository/stats_info/ bgeedb/methods_rnaseq_expression_calls
 ```
 
 After executing the command to run a particular R script or by running using be default, by calling the bash script call_all_Rscripts.sh, all figures and statistical files will be generated in `$HOME/docker_results/`.
