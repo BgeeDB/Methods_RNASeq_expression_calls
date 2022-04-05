@@ -23,7 +23,7 @@ deconv_pValue_0.01 <- merge(deconv_pValue_0.01, sampleInfo, by="libraryId")  %>%
 deconv_pValue_0.05 <- dplyr::filter(deconv_pValue, cutoff == 0.05 & libraryId %in% librariesUsed)
 deconv_pValue_0.05 <- merge(deconv_pValue_0.05, sampleInfo, by="libraryId")  %>% dplyr::select(libraryId, proportionCodingPresent, speciesId, approach, cutoff, organism)
 
-## results without decovolution
+## results without deconvolution
 without_deconv <- dplyr::filter(without_deconv, libraryId %in% librariesUsed)
 without_deconv <- merge(without_deconv, sampleInfo, by="libraryId")  %>% dplyr::select(libraryId, proportionCodingPresent,speciesId, organism)
 without_deconv$approach <- "Without deconvolution"

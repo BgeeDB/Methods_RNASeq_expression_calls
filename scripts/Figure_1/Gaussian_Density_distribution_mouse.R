@@ -66,7 +66,7 @@ for (i in 1:max(values_G_mclust)) {
   ## Print gaussian number on plot: at location of max value of gaussian
   text(dens_intergenic_sub$x[dens_intergenic_sub$y == max(dens_intergenic_sub$y)], 0.005, labels = i, col=cols[i])
 }
-## legend
+
 legend("topleft", legend =  c(paste0("coding (", sum(summed_filtered$biotype %in% "protein_coding"), ")"), paste0("intergenic (", sum(summed_filtered$type == "intergenic"), ")")), lwd=2, col=c("firebrick3", "dodgerblue3"), lty=c(2,1), bty="n")
 abline(v=log2(max_TPM), col="gray", lty=2, lwd=2)
 dev.off()

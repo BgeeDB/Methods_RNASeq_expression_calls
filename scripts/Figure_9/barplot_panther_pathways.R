@@ -16,7 +16,7 @@ cpm <- ggplot(randomCutoff, aes(x=reorder(PANTHER_Pathways, log(upload_1.fold.En
   coord_flip() + ggtitle(expression("Overrepresentation pathways: CPM">=1)) +
   xlab(" ") + ylab("Log(Fold Enrichment)") 
 
-## Overrepresentation pathways using deconvoluiton approach
+## Overrepresentation pathways using deconvolution approach
 deconvolutionCalls <- pantherResults[pantherResults$method == "Deconvolution",]
 deconvolution <- ggplot(deconvolutionCalls, aes(x=reorder(PANTHER_Pathways, log(upload_1.fold.Enrichment.)), y=log(upload_1.fold.Enrichment.))) + 
   geom_bar(stat = "identity") +

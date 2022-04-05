@@ -27,7 +27,7 @@ collectStats_merging <- function(outputFolder, bh, fdr_inverse, cutoff){
   fdr_inverse$FPR <- as.numeric(fdr_inverse$FPR)
   fdr_inverse <- na.omit(fdr_inverse)
   
-  ## return thresholds (pValue or qValue) of thresholds
+  ## return thresholds
   pValue_threshold <- max(bh$valueTreshold[which(bh$valueTreshold <= cutoff)])
   getAllRow_ThresholdBH <- bh[bh$valueTreshold == pValue_threshold,]
   
