@@ -61,5 +61,13 @@ for (i in unique(allInfo$speciesId)) {
   
 }
 
+## save output for stats
+outputFolderStats <- file.path("./stats_info/All_species/")
+if (!dir.exists(outputFolderStats)){
+  dir.create(outputFolderStats)
+} else {
+  print("Already exists!")
+}
+
 ## export table with information about % coding genes per library per method and cutoff
-write.table(allInfo, file = file.path("./stats_info/All_species/CodingGenes_callPresent_per_Library.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
+write.table(allInfo, file = file.path(outputFolderStats, "CodingGenes_callPresent_per_Library.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
