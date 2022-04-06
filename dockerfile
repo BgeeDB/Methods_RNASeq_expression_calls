@@ -27,7 +27,14 @@ RUN apt-get update \
     && R -e 'install.packages("stringr")' \
     && R -e 'install.packages("skimr")' \
     && R -e 'install.packages("inflection")' \
-    && R -e 'install.packages("stringi")'
+    && R -e 'install.packages("stringi")' \
+    && echo '# CLEANING' \
+    && echo '## This is complicated to use a builder R libraries' \
+    && echo '## So try to remove manually useless stuff' \
+    && apt remove -y *-dev wget cmake autoconf make gcc g++ gfortran python* \
+    && apt autoremove -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 # copy all directory (Methods_RNASeq_expression_calls) to docker destination
 COPY data/ /Copy_all_repository/data/
 COPY scripts/ /Copy_all_repository/scripts/
