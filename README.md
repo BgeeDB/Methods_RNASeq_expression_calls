@@ -15,8 +15,8 @@ The paper can be found on [bioRxiv](https://www.biorxiv.org/content/10.1101/2022
     *   [scripts](#scripts)
     *   [figures](#figures)
     *   [stats_info](#stats_info)
-    *   [analysis_info](#analysis_info)
     *   [complementary_analysis](#complementary_analysis)
+    *   [analysis_info](#analysis_info)
 *   [Run the repository](#runrepository)  
     *   [clone](#clone)
     *   [run per figure](#perfigure)
@@ -33,7 +33,7 @@ The paper can be found on [bioRxiv](https://www.biorxiv.org/content/10.1101/2022
 
 This repository collect all the data files, scripts  as well as intermediary files necessary to re-generate all the figures of the methods paper to call expressed genes on RNASeq data.
 
-The repository is organized by 5 main folders (data, scripts, figures, stats_info and analysis_info). Each folder contain:
+The repository is organized by 5 main folders (data, scripts, figures, stats_info and complementary_analysis). Each folder contain:
 
 #### <a name="data"></a>[data/](data/)
 Folder that contain all input data necessary to reproduce the figures of the paper as well as intermediary files that will be used later on the analysis. 
@@ -50,15 +50,17 @@ Folder that contain the sub-folders that correspond to a figure (or sub figures,
 
 Folder composed by sub-folders with .tsv files, that correspond to stats information of a figure or table in the paper.
 
+#### <a name="complementary_analysis"></a>[complementary_analysis/](complementary_analysis/)
+
+Folder that contain data, scripts and files that are used as intermediary steps to generate main figures or to provide statistics mentioned during the manuscript.
+
+
+##### An extra folder is provided with versions information:
+
 #### <a name="analysis_info"></a>[analysis_info/](analysis_info/)
 
 Folder that contain a .tsv file with the R version and packages version used during the analysis and during the generation of the figures.
 
-##### An extra folder is provided with complementary information:
-
-#### <a name="complementary_analysis"></a>[complementary_analysis/](complementary_analysis/)
-
-Folder that contain data, scripts and files that are used as intermediary steps to generate main figures or to provide statistics mentioned during the manuscript.
 
 <a name="runrepository"></a>Run the repository
 -----------------------------------------------------
@@ -73,14 +75,16 @@ git clone https://github.com/BgeeDB/Methods_RNASeq_expression_calls.git
 If you want to inspect the input files and then regenerate the files associated with figure or the figure it self you can do that by typing:
 
 ```
-Rscript $HOME/Methods_RNASeq_expression_calls/scripts/Figure_X/SCRIPT.R
+cd Methods_RNASeq_expression_calls/
+Rscript ./scripts/Figure_X/SCRIPT.R
 ```
 
 #### <a name="allanalysis"></a>all analysis
 If you want to regenerate all the files and figures of the paper you just need to call the main bash script:
 
 ```
-bash $HOME/Methods_RNASeq_expression_calls/scripts/call_all_Rscripts.sh
+cd Methods_RNASeq_expression_calls/
+bash ./scripts/call_all_Rscripts.sh
 ```
 
 
